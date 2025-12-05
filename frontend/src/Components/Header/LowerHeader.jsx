@@ -1,0 +1,27 @@
+import React from "react";
+import { AiOutlineMenu } from "react-icons/ai";
+import styles from "./Header.module.css";
+
+function LowerHeader() {
+  return (
+    // Lower navigation bar container (styled from Header.module.css)
+    <div className={styles.lower_container}>
+      <ul>
+        {/* First list item: menu icon + "All" text */}
+        <li>
+          <AiOutlineMenu />
+          <p>All</p>
+        </li>
+
+        {/* Additional navigation links */}
+        <li>Today's Deals</li>
+        <li>Customer Service</li>
+        <li>Registry</li>
+        <li>Gift Cards</li>
+        <li>Sell</li>
+      </ul>
+    </div>
+  );
+}
+
+export default LowerHeader;

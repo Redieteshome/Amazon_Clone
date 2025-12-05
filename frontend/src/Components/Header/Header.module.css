@@ -1,0 +1,209 @@
+/* Reset default margin & padding */
+*{
+    margin:0 ;
+    padding:0 ;
+}
+
+/* Main header wrapper */
+.header_container{
+  background-color: #1a1a1a;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: white;
+  height: 70px;
+}
+
+/* Logo + delivery container */
+.logo_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 250px;
+}
+
+/* Amazon logo */
+.logo_container img  {
+    width: 80%;
+    padding-top: 5px; 
+    margin-left: 20px;
+    vertical-align:  middle;
+}
+
+/* Delivery section (location icon + text) */
+.delivery{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+/* "Deliver to" text */
+.delivery p {
+    font-size: 10px;
+}
+
+/* Search bar container */
+.search{
+   display: flex; 
+   align-items: center;
+   justify-content: center;
+   border-radius: 10px;
+   overflow: hidden;
+   width: 100px;
+   flex: 1; /* allows it to expand */
+}
+
+/* Dropdown + input styling */
+.search select, 
+.search input{
+    padding: 10px;
+    font-weight: bold;
+    outline: 1px solid white;
+}
+
+/* Search category dropdown */
+.search select{
+    border: none;
+}
+
+/* Search input box */
+.search input{
+    border: 1px solid white;
+    width: 100%;
+    margin-right: -2px;
+}
+
+/* Search button icon */
+.search svg {
+    padding: 7px;
+    background: #febd69;
+    color: #1a1a1a;
+}
+
+/* Hover effect on search icon */
+.search svg:hover{
+    background-color: #d49644;
+}
+
+/* When typing inside search input */
+.search:focus-within{
+    border: 2px solid rgb(235, 161,173);
+}
+
+/* Right section (language, account, orders, cart) */
+.order_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 450px;
+    gap: 10px;
+}
+
+/* All small nav links */
+.order_container a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Small font for "Sign in", "Returns" top text */
+.order_container p{
+    font-size: 10px ;
+}
+
+/* Language section */
+.language{
+    width: 100px;
+    display: flex;
+    padding: 10px;
+}
+
+/* Language dropdown */
+.language select{
+    background-color: #1a1a1a;
+    border: none;
+    color: white;
+}
+
+/* Flag image */
+.language img{
+    width:40%;
+}
+
+/* Cart icon container */
+.cart{
+    position: relative;
+}
+
+/* Cart item count */
+.cart span{
+    position: absolute;
+    font-weight: bold;
+    top: -6px;
+    font-size: 20px;
+    background-color: #1a1a1a;
+    left: 14px;
+    color:orange
+}
+
+/* Hover effects for header items */
+.order_container a:hover,
+.delivery:hover,
+.logo_container a:hover,
+.lower_container ul li:hover {
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+/* Lower header container */
+.lower_container{
+    background-color: #232f3e;
+    color:white
+}
+
+/* Lower header nav list */
+.lower_container ul{
+    display: flex;
+    list-style: none;
+    gap: 5px;
+}
+
+/* Each lower header nav item */
+.lower_container ul li{
+    padding: 8px;
+}
+
+/* First item (hamburger style) */
+.lower_container ul li:first-child {
+    display: flex;
+    gap: 2px;
+    align-items: center ;
+}
+
+/* ======== RESPONSIVE (mobile) STYLING ======== */
+@media screen and (max-width: 576px){
+
+    /* Stack header vertically on small screens */
+    .header_container{
+        display: flex;
+        flex-direction: column !important;
+        height: auto;
+    }
+    
+    /* Search bar full width on mobile */
+    .search{
+        width:100%;
+    }
+
+    /* Hide extra nav items except the first one */
+    .lower_container ul li:not(:first-child){
+        display: none;
+    }
+
+    /* Hide language selector on mobile */
+    .language{
+        display: none;
+    }
+}
