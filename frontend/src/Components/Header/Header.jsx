@@ -4,6 +4,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
 import { BiCart } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -12,13 +13,13 @@ function Header() {
         <div className={styles.header_container}>
           {/* ==== LOGO + DELIVERY SECTION ==== */}
           <div className={styles.logo_container}>
-            <a href="#">
+            <Link to="/">
               {/* Amazon Logo */}
               <img
                 src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
                 alt="amazon logo"
               />
-            </a>
+            </Link>
 
             {/* Delivery location section */}
             <div className={styles.delivery}>
@@ -49,7 +50,7 @@ function Header() {
           {/* ==== RIGHT SIDE LINKS (Language, Account, Orders, Cart) ==== */}
           <div className={styles.order_container}>
             {/* Language selector */}
-            <a href="" className={styles.language}>
+            <Link to="" className={styles.language}>
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png?20240524035322"
                 alt=""
@@ -57,25 +58,25 @@ function Header() {
               <select name="" id="">
                 <option value="">EN</option>
               </select>
-            </a>
+            </Link>
 
             {/* Account section */}
-            <a href="">
+            <Link to="">
               <p>Sign In</p>
               <span>Account & Lists</span>
-            </a>
+            </Link>
 
             {/* Orders section */}
-            <a href="">
+            <Link to="/orders">
               <p>returns</p>
               <span>& Orders</span>
-            </a>
+            </Link>
 
             {/* Cart section */}
-            <a href="" className={styles.cart}>
+            <Link to="/cart" className={styles.cart}>
               <BiCart size={35} /> {/* Cart icon */}
               <span>0</span> {/* Item count */}
-            </a>
+            </Link>
           </div>
         </div>
       </section>
