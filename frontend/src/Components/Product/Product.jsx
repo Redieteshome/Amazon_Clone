@@ -13,9 +13,9 @@ function Product() {
         .then((res) => {
             // console.log(res)
             setProducts(res.data)
-            isLoading(false)
+            setIsLoading(false)
         }).catch((err)=>{console.log(err)
-          isLoading(false)
+          setIsLoading(false)
         })
     },[])
   
