@@ -4,7 +4,7 @@ function Loader() {
   return (
     <div
     style={{
-        display="flex",
+        display :"flex",
         alignItems:"center",
         justifyContent: "center",
         height: "50vh"
