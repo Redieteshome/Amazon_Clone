@@ -14,7 +14,7 @@ function ProductDetail() {
     
     
     useEffect(() => {
-      setIsLoading
+      setIsLoading(true)
         axios.get(`${productUrl}/products/${productId}`)
         .then((res) => {
           setSingleProduct(res.data)
@@ -29,6 +29,7 @@ function ProductDetail() {
       {isLoading? (<Loader />):  (<ProductCard product ={singleProduct}
       flex ={true}
       renderDesc={true}
+      renderAdd={true}
       />)}
      
     </Layout>
