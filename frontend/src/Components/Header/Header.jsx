@@ -9,6 +9,9 @@ import { DataContext } from "../DataProvider/DataProvider";
 
 function Header() {
   const [{basket}, dispatch] = useContext(DataContext)
+  const totalItem = basket?.reduce((amount,item)=>{
+    return item.amount + amount
+  },0)
   return (
     <section className={styles.fixed}>
       <section>
@@ -77,7 +80,7 @@ function Header() {
             {/* Cart section */}
             <Link to="/cart" className={styles.cart}>
               <BiCart size={35} /> {/* Cart icon */}
-              <span>{basket.length}</span> {/* Item count */}
+              <span>{totalItem}</span> {/* Item count */}
             </Link>
           </div>
         </div>
