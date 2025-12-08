@@ -50,7 +50,7 @@ function Header() {
             <input type="text" />
 
             {/* Search icon */}
-            <BsSearch size={25} />
+            <BsSearch size={38} />
           </div>
 
           {/* ==== RIGHT SIDE LINKS (Language, Account, Orders, Cart) ==== */}

@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { instance } from '../../Api/axios';
 import { ClipLoader } from 'react-spinners';
 import {db} from "../../Utility/firebase"
+import { Type } from '../../Utility/action.type';
 
 function Payment() {
   const navigate = useNavigate();
-  const [{ user, basket }] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
 
   // if (!user) return null;
 
@@ -81,6 +82,10 @@ function Payment() {
           amount: result.paymentIntent.amount,
           created: result.paymentIntent.created,
         });
+
+        //empty basket
+
+        dispatch({type:Type.EMPTY_BASKET})
 
       setProcessing(false);
       navigate("/orders", { state: { msg: "You have placed a new order" } });
