@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import styles from "./SignUp.module.css";
+import styles from "./signup.module.css";
 import { Link,useLocation } from "react-router-dom";
 import {auth} from "../../Utility/firebase"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
