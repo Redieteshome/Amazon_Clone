@@ -4,11 +4,12 @@ import { SlLocationPin } from "react-icons/sl";
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
 import { BiCart } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
+import {auth} from "../../Utility/firebase"
 
 function Header() {
-  const [{basket}, dispatch] = useContext(DataContext)
+  const [{user, basket}, dispatch] = useContext(DataContext)
   const totalItem = basket?.reduce((amount,item)=>{
     return item.amount + amount
   },0)
@@ -58,7 +59,7 @@ function Header() {
             <Link to="" className={styles.language}>
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png?20240524035322"
-                alt=""
+                 alt=""
               />
               <select name="" id="">
                 <option value="">EN</option>
@@ -66,9 +67,20 @@ function Header() {
             </Link>
 
             {/* Account section */}
-            <Link to="">
-              <p>Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && "/auth"}>
+              <div>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                    <span onClick={() => auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span>Account & Lists</span>
+                  </>
+                )}
+              </div>
             </Link>
 
             {/* Orders section */}
