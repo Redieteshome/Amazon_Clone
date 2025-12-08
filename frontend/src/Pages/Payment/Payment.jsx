@@ -14,13 +14,7 @@ function Payment() {
   const navigate = useNavigate();
   const [{ user, basket }] = useContext(DataContext);
 
-  React.useEffect(() => {
-    if (!user) {
-      navigate("/auth");
-    }
-  }, [user, navigate]);
-
-  if (!user) return null;
+  // if (!user) return null;
 
   const total = basket.reduce((amount, item) => {
     return item.price * item.amount + amount;
@@ -76,7 +70,7 @@ function Payment() {
       setCardError(result.error.message);
       setProcessing(false);
     } else if (result.paymentIntent.status === "succeeded") {
-      // Payment successful → save order in Firestore
+      // Payment successful → save order in
       await db
         .collection("users")
         .doc(user.uid)

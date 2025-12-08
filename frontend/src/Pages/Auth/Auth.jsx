@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import styles from "./SignUp.module.css";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import {auth} from "../../Utility/firebase"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import {ClipLoader} from "react-spinners"
@@ -18,6 +18,7 @@ function Auth() {
     signUp:false
   })
 
+  const navStateData = useLocation()
   const navigate = useNavigate()
 
   const authHandler = async (e) => {
@@ -35,7 +36,7 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signIn: false });
-          navigate("/")
+          navigate(navStateData?.state?.redirect || "/")
         })
         .catch((err) => {
           setError(err.message);
@@ -51,7 +52,7 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signUp: false });
-          navigate("/")
+         navigate(navStateData?.state?.redirect || "/");
         })
         .catch((err) => {
           setError(err.message);
@@ -74,7 +75,20 @@ function Auth() {
       {/* form */}
       <div className={styles.login_container}>
         <h1>Sign In</h1>
+         {navStateData?.state?.msg &&(
+          <small
+              style={{
+                padding:"5px",
+                textAlign:"center",
+                color: "red",
+                fontWeight:"bold"
+              }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+         )
 
+         }
         <form action="">
           <div>
             <label htmlFor="email">Email</label>
