@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+ import React, { useState, useContext } from "react";
 import styles from "./signup.module.css";
 import { Link,useLocation } from "react-router-dom";
 import {auth} from "../../Utility/firebase"
@@ -23,7 +23,7 @@ function Auth() {
 
   const authHandler = async (e) => {
     e.preventDefault();
-    console.log(e.target.name);
+    // console.log(e.target.name);
 
     if (e.target.name === "signin") {
       // firebase auth
@@ -127,7 +127,7 @@ function Auth() {
         {/* agreement */}
         <p>
           By Signing-in you agree to the AMAZON FAKE CLONE Conditions ofUse &
-          Sale. Please see our Privacy Notice, our Cookies Notice andour
+          Sale. Please see our Privacy Notice, our Cookies Notice and our
           Interest-Based Ads Notice.
         </p>
 

@@ -4,7 +4,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
 import { BiCart } from "react-icons/bi";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 import {auth} from "../../Utility/firebase"
 

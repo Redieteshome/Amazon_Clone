@@ -15,8 +15,6 @@ function Payment() {
   const navigate = useNavigate();
   const [{ user, basket }, dispatch] = useContext(DataContext);
 
-  // if (!user) return null;
-
   const total = basket.reduce((amount, item) => {
     return item.price * item.amount + amount;
   }, 0);
@@ -25,6 +23,7 @@ function Payment() {
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
   }, 0);
+  
   const [cardError, setCardError] = useState(null);
   const [processing, setProcessing] = useState(false);
 
@@ -38,67 +37,67 @@ function Payment() {
     
   // };
    const handlePayment = async (e) => {
-  e.preventDefault();
+     e.preventDefault();
 
-  if (!stripe || !elements) {
-    setCardError("Stripe has not loaded yet. Try again.");
-    return;
-  }
+     if (!stripe || !elements) {
+       setCardError("Stripe has not loaded yet. Try again.");
+       return;
+     }
+     // Get the card the user typed
+     const cardElement = elements.getElement(CardElement);
+     if (!cardElement) {
+       setCardError("Card element not found.");
+       return;
+     }
 
-  const cardElement = elements.getElement(CardElement);
-  if (!cardElement) {
-    setCardError("Card element not found.");
-    return;
-  }
+     try {
+       setProcessing(true);
 
-  try {
-    setProcessing(true);
+       // 1. Get client secret from backend
+       const response = await instance({
+         method: "POST",
+         url: `/payment/create?total=${total * 100}`,
+       });
 
-    // 1. Get client secret from backend
-    const response = await instance({
-      method: "POST",
-      url: `/payment/create?total=${total * 100}`,
-    });
+       const clientSecret = response.data?.clientSecret;
 
-    const clientSecret = response.data?.clientSecret;
+       // 2. Confirm card payment
+       const result = await stripe.confirmCardPayment(clientSecret, {
+         payment_method: { card: cardElement },
+       });
 
-    // 2. Confirm card payment
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: { card: cardElement },
-    });
+       if (result.error) {
+         setCardError(result.error.message);
+         setProcessing(false);
+       } else if (result.paymentIntent.status === "succeeded") {
+         // Payment successful → save order in
+         await db
+           .collection("users")
+           .doc(user.uid)
+           .collection("orders")
+           .doc(result.paymentIntent.id)
+           .set({
+             basket,
+             amount: result.paymentIntent.amount,
+             created: result.paymentIntent.created,
+           });
 
-    if (result.error) {
-      setCardError(result.error.message);
-      setProcessing(false);
-    } else if (result.paymentIntent.status === "succeeded") {
-      // Payment successful → save order in
-      await db
-        .collection("users")
-        .doc(user.uid)
-        .collection("orders")
-        .doc(result.paymentIntent.id)
-        .set({
-          basket,
-          amount: result.paymentIntent.amount,
-          created: result.paymentIntent.created,
-        });
+         //empty basket
 
-        //empty basket
+         dispatch({ type: Type.EMPTY_BASKET });
 
-        dispatch({type:Type.EMPTY_BASKET})
-
-      setProcessing(false);
-      navigate("/orders", { state: { msg: "You have placed a new order" } });
-    } else {
-      setCardError("Payment not completed. Try another card.");
-      setProcessing(false);
-    }
-  } catch (error) {
-    console.log(error);
-    setCardError("Something went wrong. Please try again.");
-    setProcessing(false);
-  }
-};
+         setProcessing(false);
+         navigate("/orders", { state: { msg: "You have placed a new order" } });
+       } else {
+         setCardError("Payment not completed. Try another card.");
+         setProcessing(false);
+       }
+     } catch (error) {
+       console.log(error);
+       setCardError("Something went wrong. Please try again.");
+       setProcessing(false);
+     }
+   };
 
 
     return (
@@ -127,7 +126,7 @@ function Payment() {
             <div>
               {basket?.map((item) => (
                 <ProductCard product={item} flex={true} />
-              ))}
+              ))} 
             </div>
           </div>
           <hr />
