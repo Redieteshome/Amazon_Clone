@@ -126,7 +126,7 @@
   .product_flexed{
     display: flex;
     flex-direction: column;
-    /* margin-left:20px !important ; */
+    margin-left:20px !important ;
   }
 }
 
