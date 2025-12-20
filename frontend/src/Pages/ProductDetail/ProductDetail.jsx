@@ -3,6 +3,7 @@ import React, { use, useEffect, useState } from "react";
 
 // Import Layout wrapper component
 import Layout from "../../Components/Layout/Layout";
+import styles from "./productdetail.module.css"
 
 // Import useParams to access route parameters
 import { useParams } from "react-router-dom";
@@ -61,13 +62,15 @@ function ProductDetail() {
         <Loader />
       ) : (
         // Display single product details using ProductCard
-        <ProductCard
-          key={singleProduct.id}
-          product={singleProduct}
-          flex={true}
-          renderDesc={true}
-          renderAdd={true}
-        />
+        <div className={styles.product_detail_container}> 
+          <ProductCard
+            key={singleProduct.id}
+            product={singleProduct}
+            flex={true}
+            renderDesc={true}
+            renderAdd={true}
+          />
+        </div>
       )}
     </Layout>
   );

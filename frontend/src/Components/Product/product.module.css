@@ -108,6 +108,8 @@
   }
 }
 
+
+
 /* 3 cards per row */
 @media (max-width: 992px) {
   .products_container {
@@ -124,7 +126,13 @@
   .product_flexed{
     display: flex;
     flex-direction: column;
+    margin-left:20px !important ;
   }
+}
+
+.card_container{
+  max-width:700px ;
+  margin:auto 0;
 }
 
 /* 1 card per row (mobile) */
@@ -132,6 +140,7 @@
   .products_container {
     grid-template-columns: 1fr;
     padding: 0 15px;
+    
   }
 
 }
