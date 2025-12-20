@@ -126,14 +126,10 @@
   .product_flexed{
     display: flex;
     flex-direction: column;
-    margin-left:20px !important ;
+    /* margin-left:20px !important ; */
   }
 }
 
-.card_container{
-  max-width:700px ;
-  margin:auto 0;
-}
 
 /* 1 card per row (mobile) */
 @media (max-width: 480px) {
